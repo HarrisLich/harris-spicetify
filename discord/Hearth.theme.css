@@ -1,0 +1,233 @@
+/**
+ * @name Hearth
+ * @description Cozy theme matching the Hearth Spicetify theme (snooze scheme by default).
+ * @author harri
+ * @version 1.0.0
+ */
+
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap");
+
+/* ==========================================================
+   PALETTE — same hex values as Spicetify's Hearth/color.ini.
+   To switch schemes, comment out the active block and
+   uncomment another one. Use Discord's Dark theme for all
+   of these.
+   ========================================================== */
+
+/* --- snooze (Snorlax: slate-blue night, cream, tan paws) --- */
+:root {
+  --h-text: #F5E9CC;
+  --h-subtext: #A3B2C0;
+  --h-main: #1B2530;
+  --h-main-elevated: #24303D;
+  --h-highlight: #2C3A49;
+  --h-highlight-elevated: #344556;
+  --h-sidebar: #161E27;
+  --h-card: #22303C;
+  --h-shadow: #080B0F;
+  --h-selected: #CEBD94;
+  --h-button: #B58C5A;
+  --h-button-active: #CEA571;
+  --h-button-disabled: #3E4C5A;
+  --h-notify: #52849C;
+  --h-error: #C47A6A;
+  --h-misc: #52849C;
+}
+
+/* --- ember (dark mocha + amber) ---
+:root {
+  --h-text: #F3E9DC; --h-subtext: #B8A898; --h-main: #1F1A17; --h-main-elevated: #2A231F;
+  --h-highlight: #332A25; --h-highlight-elevated: #3A302A; --h-sidebar: #1A1613; --h-card: #2A231F;
+  --h-shadow: #0D0B0A; --h-selected: #C9A58A; --h-button: #D9A066; --h-button-active: #E8B27D;
+  --h-button-disabled: #5A4D44; --h-notify: #D9A066; --h-error: #C96F5A; --h-misc: #8A7A6B;
+}
+*/
+
+/* --- forest (moss + sage) ---
+:root {
+  --h-text: #E6EDE3; --h-subtext: #A3B19F; --h-main: #1A201C; --h-main-elevated: #232B26;
+  --h-highlight: #2B352F; --h-highlight-elevated: #334038; --h-sidebar: #161B18; --h-card: #232B26;
+  --h-shadow: #0A0D0B; --h-selected: #A8C19A; --h-button: #9DB88A; --h-button-active: #B3CCA0;
+  --h-button-disabled: #4A564D; --h-notify: #9DB88A; --h-error: #C77A62; --h-misc: #7C8C7F;
+}
+*/
+
+/* ==========================================================
+   Map the palette onto Discord's variables. Both the older
+   names and the redesign ("visual refresh") names are set;
+   whichever this Discord build doesn't use is ignored.
+   ========================================================== */
+:root,
+.theme-dark,
+.theme-darker,
+.theme-midnight,
+.visual-refresh.theme-dark,
+.visual-refresh .theme-dark {
+  /* --- backgrounds: redesign names --- */
+  --background-base-lowest: var(--h-sidebar);          /* server rail / app frame */
+  --background-base-lower: var(--h-sidebar);           /* channel + member lists */
+  --background-base-low: var(--h-main);                /* chat area */
+  --background-surface-high: var(--h-main-elevated);
+  --background-surface-higher: var(--h-highlight);
+  --background-surface-highest: var(--h-highlight-elevated);
+  --chat-background-default: var(--h-main);
+  --app-frame-background: var(--h-sidebar);
+  --app-frame-border: transparent;
+  --bg-overlay-app-frame: var(--h-sidebar);
+  --modal-background: var(--h-main-elevated);
+  --modal-footer-background: var(--h-card);
+  --input-background-default: var(--h-card);
+  --chat-input-container-background: var(--h-card);
+  --channeltextarea-background: var(--h-card);
+  --card-background-default: var(--h-card);
+  --home-background: var(--h-main);
+
+  /* --- backgrounds: older names --- */
+  --background-primary: var(--h-main);
+  --background-secondary: var(--h-sidebar);
+  --background-secondary-alt: var(--h-card);
+  --background-tertiary: var(--h-sidebar);
+  --background-floating: var(--h-main-elevated);
+  --background-nested-floating: var(--h-highlight);
+  --background-accent: var(--h-highlight-elevated);
+  --bg-base-primary: var(--h-main);
+  --bg-base-secondary: var(--h-sidebar);
+  --bg-base-tertiary: var(--h-sidebar);
+  --bg-surface-overlay: var(--h-main-elevated);
+  --bg-surface-raised: var(--h-main-elevated);
+  --deprecated-card-bg: var(--h-card);
+  --deprecated-text-input-bg: var(--h-card);
+
+  /* --- hover / selected fills --- */
+  --background-modifier-hover: color-mix(in srgb, var(--h-button) 10%, transparent);
+  --background-modifier-active: color-mix(in srgb, var(--h-button) 16%, transparent);
+  --background-modifier-selected: color-mix(in srgb, var(--h-selected) 18%, transparent);
+  --background-modifier-accent: color-mix(in srgb, var(--h-subtext) 16%, transparent);
+  --background-mod-subtle: color-mix(in srgb, var(--h-button) 10%, transparent);
+  --background-mod-normal: color-mix(in srgb, var(--h-selected) 16%, transparent);
+  --background-mod-strong: color-mix(in srgb, var(--h-selected) 24%, transparent);
+  --background-message-hover: color-mix(in srgb, var(--h-highlight) 45%, transparent);
+  --bg-mod-faint: color-mix(in srgb, var(--h-button) 8%, transparent);
+  --bg-mod-subtle: color-mix(in srgb, var(--h-button) 12%, transparent);
+  --bg-mod-strong: color-mix(in srgb, var(--h-selected) 20%, transparent);
+
+  /* --- text --- */
+  --text-default: var(--h-text);
+  --text-normal: var(--h-text);
+  --text-strong: var(--h-text);
+  --text-primary: var(--h-text);
+  --header-primary: var(--h-text);
+  --text-muted: var(--h-subtext);
+  --text-secondary: var(--h-subtext);
+  --header-secondary: var(--h-subtext);
+  --text-tertiary: var(--h-misc);
+  --channels-default: var(--h-subtext);
+  --channel-icon: var(--h-subtext);
+  --text-link: var(--h-button-active);
+  --text-brand: var(--h-button);
+  --text-feedback-critical: var(--h-error);
+  --text-danger: var(--h-error);
+
+  /* --- icons / interactive --- */
+  --interactive-normal: var(--h-subtext);
+  --interactive-hover: var(--h-text);
+  --interactive-active: var(--h-text);
+  --interactive-muted: var(--h-button-disabled);
+  --interactive-text-default: var(--h-subtext);
+  --interactive-text-hover: var(--h-text);
+  --interactive-text-active: var(--h-text);
+  --icon-default: var(--h-subtext);
+  --icon-strong: var(--h-text);
+  --icon-muted: var(--h-button-disabled);
+
+  /* --- brand / buttons (Discord's blurple → tan) --- */
+  --brand-experiment: var(--h-button);
+  --brand-500: var(--h-button);
+  --brand-560: var(--h-button-active);
+  --brand-600: var(--h-button-active);
+  --control-brand-foreground: var(--h-button);
+  --control-brand-foreground-new: var(--h-button);
+  --button-filled-brand-background: var(--h-button);
+  --button-filled-brand-background-hover: var(--h-button-active);
+  --button-filled-brand-background-active: var(--h-button-active);
+  --button-filled-brand-text: var(--h-main);
+  --button-outline-brand-border: var(--h-button);
+  --mention-foreground: var(--h-button-active);
+  --mention-background: color-mix(in srgb, var(--h-button) 22%, transparent);
+  --info-warning-foreground: var(--h-button-active);
+  --status-danger: var(--h-error);
+  --status-danger-background: var(--h-error);
+  --button-danger-background: var(--h-error);
+
+  /* --- borders / scrollbars --- */
+  --border-subtle: color-mix(in srgb, var(--h-selected) 8%, transparent);
+  --border-normal: color-mix(in srgb, var(--h-selected) 12%, transparent);
+  --border-strong: color-mix(in srgb, var(--h-selected) 20%, transparent);
+  --border-faint: color-mix(in srgb, var(--h-selected) 6%, transparent);
+  --scrollbar-thin-thumb: color-mix(in srgb, var(--h-subtext) 28%, transparent);
+  --scrollbar-thin-track: transparent;
+  --scrollbar-auto-thumb: color-mix(in srgb, var(--h-subtext) 28%, transparent);
+  --scrollbar-auto-track: transparent;
+  --scrollbar-auto-scrollbar-color-thumb: color-mix(in srgb, var(--h-subtext) 28%, transparent);
+  --scrollbar-auto-scrollbar-color-track: transparent;
+
+  /* --- shape & type, to match Spotify --- */
+  --font-primary: "Nunito", "gg sans", "Segoe UI", sans-serif;
+  --font-display: "Nunito", "gg sans", "Segoe UI", sans-serif;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 14px;
+}
+
+/* ==========================================================
+   Small cozy touches (same feel as the Spotify theme)
+   ========================================================== */
+
+/* Soft warm glow behind everything, like Spotify's top container */
+#app-mount {
+  background:
+    radial-gradient(1200px 700px at 85% -10%, color-mix(in srgb, var(--h-button) 7%, transparent), transparent 60%),
+    var(--h-sidebar) !important;
+}
+
+/* Thin, quiet scrollbars */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--h-subtext) 25%, transparent);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--h-subtext) 45%, transparent);
+}
+::-webkit-scrollbar-track { background: transparent; }
+
+::selection { background: color-mix(in srgb, var(--h-button) 35%, transparent); }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+
+/* ==========================================================
+   Snorlax napping in the title bar, in place of the Discord logo
+   (same pixel sprite as Spotify's progress bar, cropped, 1x size).
+   Discord's class names end in random suffixes, so these match
+   on the stable prefix (bar_, title_, icon_).
+   ========================================================== */
+[class^="bar_"] [class^="title_"] > svg,
+[class^="bar_"] [class^="title_"] [class^="icon_"] > svg,
+[class^="bar_"] [class^="title_"] svg[class^="icon_"] {
+  width: 27px !important;
+  height: 24px !important;
+  min-width: 27px;
+  margin-right: 6px;
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABsAAAAYCAYAAAALQIb7AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFNSURBVEhLtdOxbcMwEIVhr6QVPALLrJAyK6R0mdJrpEyZNqtkBBpH6xHH/46SHMQBHiIfdPeRBHValuX0T6lrWO8JhT+mnl8vwqZgKDyYNtwgBZhfQGXzI6mfl5daf797yvu1RcNLKW0BqnHALDyi+/BSBiyD/QI4NEto0q78zgy2DLW1R8fLwUxvsL9sJ0TtWe95yOZxODNAGeYR1nhpOJy572wCqe5D6DDGAQHCJdDCPGS/j2ABUH6+PuaYAz30NCw7Qo8NRXu2gURSEKiHMqw1221yaBu2BwolsInx49SLAjNUdQ5nAuYH6niIKf6ac3AWYgPoMYLtM6i1Xt/O/UPn8Bk0xdjUoXXn/v8WOMMG0J7ZKIyZYYSINdC9NKDC7AjbMbpLQjCDMixLa7aBghRiWGxIKGwkxQzaQ5RQ2MkM4ntpQuFA/E4OQ5Ybhud34Y4E4/YAAAAASUVORK5CYII=") center / 27px 24px no-repeat !important;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 1px 2px color-mix(in srgb, var(--h-shadow) 60%, transparent));
+}
+
+/* hide the logo's own shapes so only Snorlax shows */
+[class^="bar_"] [class^="title_"] > svg > *,
+[class^="bar_"] [class^="title_"] [class^="icon_"] > svg > *,
+[class^="bar_"] [class^="title_"] svg[class^="icon_"] > * {
+  display: none !important;
+}

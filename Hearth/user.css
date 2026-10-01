@@ -1,0 +1,713 @@
+/* ==========================================================
+   Hearth — cozy / calming Spicetify theme
+   Colors come from color.ini via var(--spice-*).
+   Selectors lean on stable Root__/main-/encore classes, but
+   Spotify updates can still rename things; if a rule stops
+   working, the rest of the theme keeps going.
+   ========================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap");
+
+:root {
+  --hearth-radius: 14px;
+  --hearth-radius-sm: 10px;
+  --hearth-ease: cubic-bezier(0.25, 0.8, 0.25, 1);
+  --hearth-slow: 320ms;
+}
+
+/* ---------- Typography: Monocraft pixel font everywhere ----------
+   Spotify routes nearly all text through these encore font-stack
+   variables; the universal rule catches anything that sets its own
+   font. Nunito/system fonts remain as fallback for characters
+   Monocraft doesn't have (e.g. Japanese, Arabic). */
+:root,
+html,
+body {
+  --encore-body-font-stack: "Monocraft", "Nunito", "Segoe UI", sans-serif !important;
+  --encore-title-font-stack: "Monocraft", "Nunito", "Segoe UI", sans-serif !important;
+  --encore-variable-font-stack: "Monocraft", "Nunito", "Segoe UI", sans-serif !important;
+  --encore-text-font-family: "Monocraft", "Nunito", "Segoe UI", sans-serif !important;
+  --font-family: "Monocraft", "Nunito", "Segoe UI", sans-serif !important;
+}
+
+*:not(svg):not(svg *) {
+  font-family: "Monocraft", "Nunito", "Segoe UI", sans-serif !important;
+  letter-spacing: 0 !important;
+}
+
+/* ---------- Background: faint warm glow instead of flat color ---------- */
+.Root__top-container {
+  background:
+    radial-gradient(1200px 700px at 85% -10%, rgba(var(--spice-rgb-button), 0.07), transparent 60%),
+    radial-gradient(900px 600px at -10% 110%, rgba(var(--spice-rgb-selected-row), 0.05), transparent 60%),
+    var(--spice-sidebar) !important;
+}
+
+/* Tone down Spotify's loud album-color header gradients */
+.main-entityHeader-backgroundColor,
+.main-actionBarBackground-background,
+.main-entityHeader-overlay {
+  opacity: 0.35 !important;
+  transition: opacity var(--hearth-slow) var(--hearth-ease);
+}
+
+/* ---------- Panels: rounder, softer ---------- */
+.Root__nav-bar,
+.Root__main-view,
+.Root__right-sidebar,
+.main-yourLibraryX-libraryContainer {
+  border-radius: var(--hearth-radius) !important;
+  overflow: hidden;
+}
+
+.Root__main-view {
+  box-shadow: 0 8px 30px rgba(var(--spice-rgb-shadow), 0.35);
+}
+
+/* ---------- Cards: gentle lift instead of harsh highlight ---------- */
+.main-card-card {
+  border-radius: var(--hearth-radius) !important;
+  background: var(--spice-card) !important;
+  transition:
+    transform var(--hearth-slow) var(--hearth-ease),
+    box-shadow var(--hearth-slow) var(--hearth-ease),
+    background-color var(--hearth-slow) var(--hearth-ease) !important;
+}
+
+.main-card-card:hover {
+  transform: translateY(-3px);
+  background: var(--spice-highlight) !important;
+  box-shadow: 0 10px 24px rgba(var(--spice-rgb-shadow), 0.4);
+}
+
+.main-card-card img,
+.main-cardImage-imageWrapper,
+.main-cardImage-image {
+  border-radius: var(--hearth-radius-sm) !important;
+}
+
+/* Library / sidebar list item art */
+.main-yourLibraryX-listItem img,
+.main-image-image {
+  border-radius: 8px !important;
+}
+
+/* ---------- Tracklist rows ---------- */
+.main-trackList-trackListRow {
+  border-radius: var(--hearth-radius-sm) !important;
+  transition: background-color 220ms var(--hearth-ease);
+}
+
+.main-trackList-trackListRow:hover {
+  background-color: rgba(var(--spice-rgb-button), 0.08) !important;
+}
+
+.main-trackList-trackListRow[aria-selected="true"],
+.main-trackList-selected {
+  background-color: rgba(var(--spice-rgb-selected-row), 0.16) !important;
+}
+
+/* ---------- Buttons: warm, pill-shaped, no neon ---------- */
+.main-playButton-PlayButton button,
+.main-playButton-button,
+[data-testid="play-button"] > span,
+.encore-bright-accent-set {
+  background-color: var(--spice-button) !important;
+  color: var(--spice-main) !important;
+  box-shadow: 0 6px 18px rgba(var(--spice-rgb-button), 0.3);
+  transition:
+    transform 220ms var(--hearth-ease),
+    background-color 220ms var(--hearth-ease) !important;
+}
+
+.main-playButton-PlayButton button:hover,
+[data-testid="play-button"]:hover > span {
+  background-color: var(--spice-button-active) !important;
+  transform: scale(1.04) !important;
+}
+
+/* ---------- Now-playing bar ---------- */
+.Root__now-playing-bar {
+  background: var(--spice-player) !important;
+  border-top: 1px solid rgba(var(--spice-rgb-selected-row), 0.12);
+}
+
+.main-nowPlayingWidget-coverArt img,
+.cover-art img {
+  border-radius: var(--hearth-radius-sm) !important;
+  box-shadow: 0 4px 14px rgba(var(--spice-rgb-shadow), 0.45);
+}
+
+/* Progress + volume bars: thicker, rounded, amber fill */
+.progress-bar {
+  --progress-bar-height: 5px !important;
+  --progress-bar-radius: 999px !important;
+  --fg-color: var(--spice-button) !important;
+  --bg-color: rgba(var(--spice-rgb-subtext), 0.25) !important;
+}
+
+.progress-bar:hover {
+  --fg-color: var(--spice-button-active) !important;
+}
+
+/* ---------- Search box & inputs ---------- */
+input[type="search"],
+.x-searchInput-searchInputInput,
+[data-testid="search-input"] {
+  border-radius: 999px !important;
+  background-color: var(--spice-main-elevated) !important;
+  border: 1px solid rgba(var(--spice-rgb-selected-row), 0.15) !important;
+}
+
+/* ---------- Context menus & popovers ---------- */
+.main-contextMenu-menu,
+.main-trackCreditsModal-container,
+.GenericModal {
+  border-radius: var(--hearth-radius) !important;
+  background-color: var(--spice-main-elevated) !important;
+  box-shadow: 0 16px 40px rgba(var(--spice-rgb-shadow), 0.5) !important;
+}
+
+/* ---------- Scrollbars: thin and quiet ---------- */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(var(--spice-rgb-subtext), 0.25);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(var(--spice-rgb-subtext), 0.45);
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* ---------- Links & selection ---------- */
+::selection {
+  background: rgba(var(--spice-rgb-button), 0.35);
+}
+
+a:hover {
+  color: var(--spice-button-active) !important;
+}
+
+/* ---------- Respect reduced-motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+  .main-card-card:hover {
+    transform: none;
+  }
+}
+
+/* ---------- Snorlax riding the song progress bar ---------- */
+/* Scoped to the song bar only; the volume slider keeps its normal dot. */
+[data-testid="playback-progressbar"] .progress-bar__slider {
+  display: flex !important;               /* always visible, not just on hover */
+  width: 40px !important;               /* native 1x size = crisp pixels */
+  height: 30px !important;
+  margin-left: -20px !important;
+  background: url("__SNORLAX__") center / 40px 30px no-repeat !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  transform: translateY(-88%) !important; /* lie on top of the bar */
+  image-rendering: pixelated !important;
+  filter: drop-shadow(0 2px 3px rgba(var(--spice-rgb-shadow), 0.5));
+  pointer-events: none;                   /* clicks still seek the track */
+  transition: filter 200ms var(--hearth-ease);
+}
+
+[data-testid="playback-progressbar"]:hover .progress-bar__slider {
+  filter: drop-shadow(0 0 6px rgba(var(--spice-rgb-button), 0.7));
+}
+
+/* ---------- Home shortcut cards: play button only on hover ---------- */
+/* .gHRmnzWv7_EhCyjcB5fg is Spotify's hashed "trailingOverlay" class; if an
+   update renames it, grep xpui/*.js for trailingOverlay to get the new one. */
+div:has(> [data-testid="shortcut-background"]) .gHRmnzWv7_EhCyjcB5fg {
+  opacity: 0 !important;
+  pointer-events: none;
+  transform: translateX(4px);
+  transition:
+    opacity 220ms var(--hearth-ease),
+    transform 220ms var(--hearth-ease) !important;
+}
+
+div:has(> [data-testid="shortcut-background"]):hover .gHRmnzWv7_EhCyjcB5fg,
+div:has(> [data-testid="shortcut-background"]):focus-within .gHRmnzWv7_EhCyjcB5fg {
+  opacity: 1 !important;
+  pointer-events: auto;
+  transform: none;
+}
+
+/* ==========================================================
+   Pokémon friends (Gen 7 menu icons, cropped, shown at whole-
+   number scales so pixels stay crisp). The double-underscore
+   placeholders are swapped for embedded images by build.ps1.
+   ========================================================== */
+
+/* Jigglypuff: peeking over the top-right of the now-playing album art */
+.main-nowPlayingWidget-coverArt::before {
+  content: "";
+  position: absolute;
+  top: -14px;
+  right: -8px;
+  width: 18px;
+  height: 20px;
+  z-index: 3;
+  background: url("__JIGGLYPUFF__") center / 18px 20px no-repeat;
+  image-rendering: pixelated;
+  pointer-events: none;
+  filter: drop-shadow(0 1px 2px rgba(var(--spice-rgb-shadow), 0.6));
+}
+
+/* Munchlax: sitting before the "Your Library" title, facing it */
+.main-yourLibraryX-headerContent::before {
+  content: "";
+  flex: 0 0 14px;
+  width: 14px;
+  height: 19px;
+  margin-left: 2px;
+  background: url("__MUNCHLAX__") center / 14px 19px no-repeat;
+  image-rendering: pixelated;
+  transform: scaleX(-1);
+  pointer-events: none;
+}
+
+/* Pikachu: right beside the search box, looking at it */
+.main-globalNav-searchContainer::after {
+  content: "";
+  flex: 0 0 21px;
+  align-self: center;
+  width: 21px;
+  height: 20px;
+  margin-left: 10px;
+  background: url("__PIKACHU__") center / 21px 20px no-repeat;
+  image-rendering: pixelated;
+  pointer-events: none;
+}
+
+/* Eevee: hops onto the corner of any playlist/album card on hover (2x) */
+.main-card-card::after {
+  content: "";
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  width: 34px;
+  height: 36px;
+  z-index: 3;
+  background: url("__EEVEE__") center / 34px 36px no-repeat;
+  image-rendering: pixelated;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity 260ms var(--hearth-ease),
+    transform 260ms var(--hearth-ease);
+  filter: drop-shadow(0 2px 3px rgba(var(--spice-rgb-shadow), 0.6));
+}
+
+.main-card-card:hover::after {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==========================================================
+   Save button → Larvitar (not saved) / Tyranitar (saved)
+   Spotify marks the save/"Add to Liked Songs" button with
+   aria-checked="true|false", so the sprite follows its state.
+   Covers the now-playing bar and track list rows.
+   ========================================================== */
+.main-nowPlayingWidget-nowPlaying button[aria-checked],
+.main-trackList-trackListRow button[aria-checked] {
+  min-width: 26px;
+  min-height: 26px;
+  background: url("__LARVITAR__") center / 15px 20px no-repeat !important;
+  image-rendering: pixelated;
+  filter: saturate(0.55) brightness(0.9);   /* a little sleepy until saved */
+  transition: filter 200ms var(--hearth-ease), transform 200ms var(--hearth-ease);
+}
+
+.main-nowPlayingWidget-nowPlaying button[aria-checked] svg,
+.main-trackList-trackListRow button[aria-checked] svg {
+  opacity: 0 !important;                    /* hide Spotify's +/✓ icon */
+}
+
+/* Spotify's green "saved" check animation is a Lottie player inside a
+   Shadow DOM (outside CSS can't reach its svg), so hide its wrapper
+   div instead; it's identified by the inline style Spotify gives it. */
+.main-nowPlayingWidget-nowPlaying button[aria-checked] div[style*="pointer-events: none"],
+.main-trackList-trackListRow button[aria-checked] div[style*="pointer-events: none"],
+.main-nowPlayingWidget-nowPlaying button[aria-checked] div[style*="position: absolute"],
+.main-trackList-trackListRow button[aria-checked] div[style*="position: absolute"] {
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+.main-nowPlayingWidget-nowPlaying button[aria-checked]:hover,
+.main-trackList-trackListRow button[aria-checked]:hover {
+  filter: none;
+  transform: translateY(-1px) scale(1.08);
+}
+
+.main-nowPlayingWidget-nowPlaying button[aria-checked="true"],
+.main-trackList-trackListRow button[aria-checked="true"] {
+  background: url("__TYRANITAR__") center / 25px 24px no-repeat !important;
+  filter: drop-shadow(0 0 4px rgba(var(--spice-rgb-button), 0.35));
+}
+
+/* Flash only right after you click save (the button has focus then),
+   not when saved rows scroll into view. */
+.main-nowPlayingWidget-nowPlaying button[aria-checked="true"]:focus,
+.main-trackList-trackListRow button[aria-checked="true"]:focus {
+  animation: hearth-evolve 700ms var(--hearth-ease);
+}
+
+/* White flash when Larvitar evolves (runs when a song becomes saved) */
+@keyframes hearth-evolve {
+  0%   { filter: brightness(3) saturate(0); transform: scale(0.7); }
+  45%  { filter: brightness(3) saturate(0); transform: scale(1.15); }
+  100% { filter: drop-shadow(0 0 4px rgba(var(--spice-rgb-button), 0.35)); transform: scale(1); }
+}
+
+/* ==========================================================
+   Play/pause → Snorlax napping (paused) / Munchlax awake (playing)
+   Spotify only exposes the state through aria-label ("Play" while
+   paused, "Pause" while playing), so these match an English client.
+   ========================================================== */
+[data-testid="control-button-playpause"] {
+  overflow: visible !important;
+  background: url("__SNORLAXNAP__") center / 27px 24px no-repeat !important;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 2px 3px rgba(var(--spice-rgb-shadow), 0.6));
+  transition: transform 200ms var(--hearth-ease), filter 200ms var(--hearth-ease) !important;
+}
+
+/* hide Spotify's white circle and ▶/⏸ glyph */
+[data-testid="control-button-playpause"] > span,
+[data-testid="control-button-playpause"] span {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+[data-testid="control-button-playpause"] svg {
+  opacity: 0 !important;
+}
+
+[data-testid="control-button-playpause"]:hover {
+  transform: scale(1.1) !important;
+  filter: drop-shadow(0 0 6px rgba(var(--spice-rgb-button), 0.55));
+}
+
+/* Paused: Snorlax flops down for a nap */
+[data-testid="control-button-playpause"][aria-label="Play"] {
+  animation: hearth-flop 450ms var(--hearth-ease);
+}
+
+/* Playing: Munchlax hops up (2x so he's as wide as napping Snorlax) */
+[data-testid="control-button-playpause"][aria-label="Pause"] {
+  background: url("__MUNCHLAX__") center / 28px 38px no-repeat !important;
+  animation: hearth-hop 450ms var(--hearth-ease);
+}
+
+@keyframes hearth-hop {
+  0%   { transform: translateY(0) scale(0.85); }
+  40%  { transform: translateY(-6px) scale(1.05); }
+  100% { transform: translateY(0) scale(1); }
+}
+
+@keyframes hearth-flop {
+  0%   { transform: translateY(-4px) rotate(-6deg); }
+  60%  { transform: translateY(1px) rotate(2deg); }
+  100% { transform: none; }
+}
+
+/* ==========================================================
+   Monocraft pixel font for headings (OFL, github.com/IdreesInc/Monocraft)
+   Body text stays in Nunito for readability.
+   ========================================================== */
+@font-face {
+  font-family: "Monocraft";
+  src: url("__MONOCRAFT__") format("opentype");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monocraft";
+  src: url("__MONOCRAFTBOLD__") format("opentype");
+  font-weight: 700 900;
+  font-display: swap;
+}
+
+h1, h2,
+.encore-text-headline-large,
+.encore-text-headline-medium,
+.encore-text-title-extra,
+.encore-text-title-large,
+.encore-text-title-medium,
+.encore-text-title-small,
+.main-entityHeader-title,
+.main-entityHeader-title *,
+.main-yourLibraryX-collapseButton,
+.main-yourLibraryX-collapseButton *,
+.main-nowPlayingWidget-trackInfo .main-trackInfo-name,
+.main-nowPlayingWidget-trackInfo .main-trackInfo-name * {
+  font-family: "Monocraft", "Nunito", monospace !important;
+  letter-spacing: 0 !important;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ==========================================================
+   Shared look for sprite buttons in the player bar
+   ========================================================== */
+:is([data-testid="control-button-shuffle"], .player-controls__left button:not([data-testid="control-button-skip-back"])),
+[data-testid="control-button-repeat"],
+[data-testid="volume-bar-toggle-mute-button"] {
+  overflow: visible !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  image-rendering: pixelated;
+  transition: transform 200ms var(--hearth-ease), filter 200ms var(--hearth-ease) !important;
+}
+:is([data-testid="control-button-shuffle"], .player-controls__left button:not([data-testid="control-button-skip-back"])) svg,
+[data-testid="control-button-repeat"] svg,
+[data-testid="volume-bar-toggle-mute-button"] svg {
+  opacity: 0 !important;
+}
+:is([data-testid="control-button-shuffle"], .player-controls__left button:not([data-testid="control-button-skip-back"])):hover,
+[data-testid="control-button-repeat"]:hover,
+[data-testid="volume-bar-toggle-mute-button"]:hover {
+  transform: translateY(-1px) scale(1.12) !important;
+  filter: drop-shadow(0 0 5px rgba(var(--spice-rgb-button), 0.5));
+}
+
+/* ---------- Shuffle: Ditto (off) → Unown (on) ---------- */
+:is([data-testid="control-button-shuffle"], .player-controls__left button:not([data-testid="control-button-skip-back"])) {
+  background-image: url("__DITTO__") !important;
+  background-size: 16px 13px !important;
+  filter: saturate(0.6);
+}
+:is([data-testid="control-button-shuffle"], .player-controls__left button:not([data-testid="control-button-skip-back"]))[aria-checked="true"] {
+  background-image: url("__UNOWN__") !important;
+  background-size: 10px 21px !important;
+  filter: none;
+}
+:is([data-testid="control-button-shuffle"], .player-controls__left button:not([data-testid="control-button-skip-back"]))[aria-checked="true"]:focus {
+  animation: hearth-scramble 400ms steps(4);   /* jitter when switched on */
+}
+@keyframes hearth-scramble {
+  0%   { transform: translate(-2px, 1px) rotate(-8deg); }
+  25%  { transform: translate(2px, -1px) rotate(6deg); }
+  50%  { transform: translate(-1px, -2px) rotate(-4deg); }
+  75%  { transform: translate(1px, 2px) rotate(3deg); }
+  100% { transform: none; }
+}
+
+/* ---------- Repeat: Pichu (off) → Pikachu (all) → Raichu (one) ---------- */
+[data-testid="control-button-repeat"] {
+  background-image: url("__PICHU__") !important;
+  background-size: 15px 19px !important;
+  filter: saturate(0.6);
+}
+[data-testid="control-button-repeat"][aria-checked="true"] {
+  background-image: url("__PIKACHU__") !important;
+  background-size: 21px 20px !important;
+  filter: none;
+}
+[data-testid="control-button-repeat"][aria-checked="mixed"] {
+  background-image: url("__RAICHU__") !important;
+  background-size: 25px 24px !important;
+  filter: none;
+}
+[data-testid="control-button-repeat"][aria-checked="true"]:focus,
+[data-testid="control-button-repeat"][aria-checked="mixed"]:focus {
+  animation: hearth-evolve 700ms var(--hearth-ease);
+}
+
+/* ---------- Volume: Whismur / Loudred / Exploud by level, Jigglypuff muted ----------
+   hearth.js sets data-hearth-vol on <html>; Loudred is the fallback. */
+[data-testid="volume-bar-toggle-mute-button"] {
+  background-image: url("__LOUDRED__") !important;
+  background-size: 21px 23px !important;
+}
+html[data-hearth-vol="low"] [data-testid="volume-bar-toggle-mute-button"] {
+  background-image: url("__WHISMUR__") !important;
+  background-size: 17px 16px !important;
+}
+html[data-hearth-vol="high"] [data-testid="volume-bar-toggle-mute-button"] {
+  background-image: url("__EXPLOUD__") !important;
+  background-size: 27px 26px !important;
+}
+html [data-testid="volume-bar-toggle-mute-button"][aria-label="Unmute"] {
+  background-image: url("__JIGGLYPUFF__") !important;
+  background-size: 18px 20px !important;
+  filter: saturate(0.7) brightness(0.9);
+}
+
+/* ==========================================================
+   Album-art glow (hearth.js sets --hearth-art to the cover URL)
+   Spotify's panels are opaque, so instead of sitting behind them
+   a blurred copy of the cover tints the whole window through
+   soft-light blending, which keeps text contrast intact.
+   ========================================================== */
+body::after {
+  content: "";
+  position: fixed;
+  inset: -100px;               /* bleed past edges so the blur has no hard rim */
+  z-index: 40;
+  pointer-events: none;
+  background: var(--hearth-art, none) center / cover no-repeat;
+  filter: blur(100px) saturate(1.3);
+  mix-blend-mode: soft-light;
+  opacity: 0.55;
+  transition: opacity 1.6s ease;
+  will-change: opacity;          /* own GPU layer: blur is rendered once, not per frame */
+  transform: translateZ(0);
+}
+html:not([data-hearth-art]) body::after,
+html[data-hearth-art-fading] body::after {
+  opacity: 0;                  /* hearth.js fades out, swaps cover, fades in */
+}
+
+/* ==========================================================
+   Weather layer canvas (drawn by hearth.js)
+   ========================================================== */
+#hearth-weather {
+  position: fixed;
+  pointer-events: none;
+  z-index: 50;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+#hearth-weather.on {
+  opacity: 1;
+}
+
+/* ==========================================================
+   Rain — adapted from "CSS Rain Effect" by Aaron Rickle
+   (codepen.io/arickle/pen/XKjMZY, MIT). Drops are built by
+   hearth.js; all motion is CSS transforms/opacity (GPU-smooth).
+   Tinted with the theme's text color and softened a bit.
+   ========================================================== */
+#hearth-rain {
+  position: fixed;
+  z-index: 50;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+  --hr-h: 80vh;                    /* hearth.js sets: panel top → player bar */
+}
+#hearth-rain.on {
+  opacity: 1;
+}
+
+#hearth-rain .hr-row {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--hr-h);             /* panel top → top of the player bar */
+  z-index: 2;
+}
+#hearth-rain .hr-back {
+  z-index: 1;
+  top: -24px;                      /* farther away: lands just above the bar */
+  opacity: 0.5;
+}
+
+#hearth-rain .hr-drop {
+  position: absolute;
+  bottom: 100%;
+  width: 15px;
+  height: 120px;
+  pointer-events: none;
+  will-change: transform;
+  /* bar distance + how far above the top this drop started (--b, % of
+     height) + 42px from the drop's bottom edge up to its splat ring */
+  --hr-land: calc(var(--hr-h) * (1 + var(--b, 5) / 100) + 42px);
+  animation: hr-drop 0.5s linear infinite;
+}
+@keyframes hr-drop {
+  0%   { transform: translateY(0); }
+  75%  { transform: translateY(var(--hr-land)); }
+  100% { transform: translateY(var(--hr-land)); }
+}
+
+#hearth-rain .hr-stem {
+  width: 1px;
+  height: 60%;
+  margin-left: 7px;
+  background: linear-gradient(to bottom, rgba(var(--spice-rgb-text), 0), rgba(var(--spice-rgb-text), 0.22));
+  animation: hr-stem 0.5s linear infinite;
+}
+@keyframes hr-stem {
+  0%   { opacity: 1; }
+  65%  { opacity: 1; }
+  75%  { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+#hearth-rain .hr-splat {
+  width: 15px;
+  height: 10px;
+  border-top: 2px dotted rgba(var(--spice-rgb-text), 0.4);
+  border-radius: 50%;
+  opacity: 1;
+  transform: scale(0);
+  animation: hr-splat 0.5s linear infinite;
+}
+@keyframes hr-splat {
+  0%   { opacity: 1;   transform: scale(0); }
+  80%  { opacity: 1;   transform: scale(0); }
+  90%  { opacity: 0.5; transform: scale(1); }
+  100% { opacity: 0;   transform: scale(1.5); }
+}
+
+/* ==========================================================
+   Previous / next → Latios flying left / Latias flying right
+   (both icons face left; Latias is mirrored for "next")
+   ========================================================== */
+[data-testid="control-button-skip-back"],
+[data-testid="control-button-skip-forward"] {
+  overflow: visible !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  image-rendering: pixelated;
+  transition: transform 220ms var(--hearth-ease), filter 220ms var(--hearth-ease) !important;
+}
+[data-testid="control-button-skip-back"] svg,
+[data-testid="control-button-skip-forward"] svg {
+  opacity: 0 !important;
+}
+
+[data-testid="control-button-skip-back"] {
+  background-image: url("__LATIOS__") !important;
+  background-size: 28px 22px !important;
+}
+[data-testid="control-button-skip-forward"] {
+  background-image: url("__LATIAS__") !important;
+  background-size: 27px 21px !important;
+  transform: scaleX(-1);
+}
+
+/* hover: dart a little in the direction they skip */
+[data-testid="control-button-skip-back"]:hover {
+  transform: translateX(-3px) !important;
+  filter: drop-shadow(0 0 5px rgba(var(--spice-rgb-button), 0.5));
+}
+[data-testid="control-button-skip-forward"]:hover {
+  transform: scaleX(-1) translateX(-3px) !important;   /* mirrored, so -3px moves right */
+  filter: drop-shadow(0 0 5px rgba(var(--spice-rgb-button), 0.5));
+}
+
+/* click: a quick swoop */
+[data-testid="control-button-skip-back"]:active {
+  transform: translateX(-7px) scale(0.92) !important;
+}
+[data-testid="control-button-skip-forward"]:active {
+  transform: scaleX(-1) translateX(-7px) scale(0.92) !important;
+}

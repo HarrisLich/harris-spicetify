@@ -1,0 +1,22 @@
+# Files embedded into user.css as data: URIs by build.ps1 / build.sh.
+# Format: PLACEHOLDER  path (relative to Hearth/)  mime-type
+__SNORLAX__        snorlax-icon.png                 image/png
+__SNORLAXNAP__     snorlax-icon-cropped.png         image/png
+__JIGGLYPUFF__     sprites/jigglypuff-cropped.png   image/png
+__MUNCHLAX__       sprites/munchlax-cropped.png     image/png
+__PIKACHU__        sprites/pikachu-cropped.png      image/png
+__EEVEE__          sprites/eevee-cropped.png        image/png
+__SYLVEON__        sprites/sylveon-cropped.png      image/png
+__LARVITAR__       sprites/larvitar-cropped.png     image/png
+__TYRANITAR__      sprites/tyranitar-cropped.png    image/png
+__LATIOS__         sprites/latios-cropped.png       image/png
+__LATIAS__         sprites/latias-cropped.png       image/png
+__DITTO__          sprites/ditto-cropped.png        image/png
+__UNOWN__          sprites/unown-cropped.png        image/png
+__PICHU__          sprites/pichu-cropped.png        image/png
+__RAICHU__         sprites/raichu-cropped.png       image/png
+__WHISMUR__        sprites/whismur-cropped.png      image/png
+__LOUDRED__        sprites/loudred-cropped.png      image/png
+__EXPLOUD__        sprites/exploud-cropped.png      image/png
+__MONOCRAFT__      fonts/Monocraft.otf              font/otf
+__MONOCRAFTBOLD__  fonts/Monocraft-Bold.otf         font/otf
